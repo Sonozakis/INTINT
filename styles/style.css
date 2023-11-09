@@ -21,7 +21,7 @@ img {
 /*********/
 @font-face {
   font-family: 'title';
-  src: url('/fonts/Shardee.woff2');
+  src: url('./fonts/Shardee.woff2');
   font-weight: normal;
   font-style: normal;
 }
@@ -60,7 +60,7 @@ body {
   align-items: center;
   height: 100vh;
   width: 100vw;
-  background-image: url(/images/texture.png);
+  background-image: url(./images/texture.png);
   background-position: top right;
   background-size: 30em 30em;
   overflow-x: hidden;
