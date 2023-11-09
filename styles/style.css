@@ -144,6 +144,10 @@ button img:active {
   transform: scale(0.9);
 }
 
+p {
+  font-size: 1em;
+}
+
 
 
 /**********/
