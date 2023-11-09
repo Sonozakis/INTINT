@@ -1,14 +1,10 @@
 /**************/
 /* CSS REMEDY */
 /**************/
-
-/* naar een idee van Jen Simmons */
 *, *::after, *::before {
-  box-sizing:border-box;  
-}
-
-body {
+  box-sizing:border-box; 
   margin:0;
+  padding:0;
 }
 
 button:not([disabled]) {
@@ -20,31 +16,393 @@ img {
 }
 
 
+/*********/
+/* FONTS */
+/*********/
+@font-face {
+  font-family: 'title';
+  src: url('/fonts/Shardee.woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre&family=Varela+Round&display=swap');
 
 
 
 /*********************/
 /* CUSTOM PROPERTIES */
 /*********************/
-
 :root {
-  --color-headings:crimson
-  /* ... */
+  --background: hsl(289, 35%, 63%);
+  --main-color: hsl(0, 0%, 100%);
+  --secondary-color: hsl(291, 19%, 22%);
+  --tertiary-color: hsl(291, 46%, 36%);
+  --footer-color: hsl(291, 19%, 22%);
+  --heading-shadow: hsla(0, 43%, 93%, 0.6);
+  --button-shadow: hsla(291, 19%, 22%, 0.4);
 
+  --heading-font: 'title', Didot, 'Bodoni MT', 'Noto Serif Display', 'URW Palladio L', P052, Sylfaen, serif; 
+  --secondary-font: 'Abhaya Libre', Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif; 
+  --normal-font: 'Varela Round', ui-rounded, 'Hiragino Maru Gothic ProN', Quicksand, Comfortaa, Manjari, 'Arial Rounded MT', 'Arial Rounded MT Bold', Calibri, source-sans-pro, sans-serif;
 }
 
 
 
+/***********/
+/* GENERAL */
+/***********/
+body {
+  background-color: var(--background);
+  color: var(--main-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-image: url(/images/texture.png);
+  background-position: top right;
+  background-size: 30em 30em;
+  overflow-x: hidden;
+}
 
+/* White part of moon */
+body::after {
+  content: "";
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20em;
+  height: 20em;
+  border-radius: 50%;
+  background-color: white;
+  z-index: -2;
+  position: absolute;
+  text-align: center;
+}
 
-/********************/
-/* ALGEMENE STYLING */
-/********************/
+/* Purple part of moon */
+body::before {
+  content: "";
+  top: 45%;
+  left: 50%;
+  transform: translate(-70%, -52%);
+  width: 17em;
+  height: 17em;
+  border-radius: 50%;
+  background-color: var(--background);
+  z-index: -1;
+  position: absolute;
+  text-align: center;
+}
 
 h1 {
-  color:var(--color-headings);
+  font-family: var(--heading-font);
+  font-size: clamp(1rem, 4rem, 10rem);
+  text-align: center;
+  filter: drop-shadow(0em 0em  0.1em var(--heading-shadow));
 }
 
-/* ... */
+h2 {
+  color: var(--tertiary-color);
+  margin-bottom: 0.2em;
+  font-size: 1.3em;
+}
+
+ul {
+  list-style-type: none;
+}
+
+button {
+  background: none;
+  border: none;
+}
+
+button:focus-visible {
+  outline-color: white;
+  outline-width: 0.15em;
+  border-radius: 1em;
+  outline-style: solid;   
+  filter: drop-shadow(0em 0em  0.5em var(--heading-shadow));
+}
+
+button img {
+  transition: 0.2s;
+}
+
+/* All buttons glow on hover */
+button img:hover {
+  filter: drop-shadow(0em 0em  0.5em var(--heading-shadow));
+  transition: 0.2s;
+}
+
+/* Makes buttons smaller on click, removes glow */
+button img:active {
+  filter: none;
+  transform: scale(0.9);
+}
 
 
+
+/**********/
+/* HEADER */
+/**********/
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em 1em 0 1em;
+  width: 100vw;
+}
+
+/* Adds shadows to all buttons in header */
+header section {
+  display: flex;
+  align-items: center;
+  gap: 5em;
+}
+
+/* Mirrors the left button */
+header section button:nth-of-type(1) img {
+  transform: scaleX(-1);
+}
+
+/* Music note location */
+header button:nth-of-type(1) {
+  margin-left: auto;
+}
+
+/* Music note size */
+header img {
+  max-width: 2.5em;
+  max-height: 2.5em;
+}
+
+/* Adds shadow to all buttons */
+header button img {
+  filter: drop-shadow(0.125em 0.1875em var(--button-shadow));
+}
+
+/* Year */
+header p {
+  text-align: center;
+  color: var(--secondary-color);
+  font-family: var(--secondary-font);
+  font-size: 1.8em;
+  font-weight: medium;
+}
+
+
+
+/********/
+/* MAIN */
+/********/
+main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: end;
+  margin-top: 2em;
+  width: 100vw;
+  flex-grow: 1;
+}
+
+main ul {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8em;
+  min-height: 100%;
+  flex-grow: 1;
+}
+
+/* Description text box */
+main ul li article {
+  display: none; /* Initially hide the text content */
+  background-color: var(--main-color);
+  height: 20vh;
+  width: 15vw;
+  overflow-y: auto;
+  text-align: left;
+  border-radius: 2em;
+  border-color: var(--tertiary-color);
+  border-width: 0.12em;
+  border-style: solid;
+  color: var(--background);
+  padding: 1.8em;
+  padding-bottom: 2em;
+  font-family: var(--normal-font);
+  position: absolute;
+  top: 0; 
+  left: 0; 
+  z-index: 5; 
+  scrollbar-width: none; /* Couldn't round the scrollbar corner so I removed it */
+}
+
+main ul:nth-of-type(2) {
+  gap: 3em;
+}
+
+/* Makes object positions look randomised, Communicator */
+main ul:nth-of-type(1) li:nth-of-type(1) {
+  transform: translateY(-2em);
+}
+
+/* Moon Stick */
+main ul:nth-of-type(1) li:nth-of-type(2) {
+  transform: translateX(10em);
+}
+
+/* Tiara */
+main ul:nth-of-type(1) li:nth-of-type(3) {
+  transform: translateX(-3em) translateY(-5em);
+}
+
+/* Red Hair Pins */
+main ul:nth-of-type(2) li:nth-of-type(1) {
+  transform: translateX(-12em) translateY(6em);
+}
+
+/* Transformation Brooch */
+main ul:nth-of-type(3) li:nth-of-type(1) {
+  transform: translateX(-20em);
+}
+
+/* Disguise Pen */
+main ul:nth-of-type(3) li:nth-of-type(2) {
+  transform: translateY(-3em);
+}
+
+/* Silver Crystal */
+main ul:nth-of-type(3) li:nth-of-type(3) {
+  transform: translateX(-9em) translateY(-5em);
+}
+
+/* Object size */
+main ul li button {
+  max-height: 15vh;
+  max-width: 20vw;
+  position: relative; /* Add relative positioning to the button */
+  z-index: -1; 
+}
+
+main ul li button img {
+  max-height: 15vh;
+  max-width: 15vw;
+}
+
+/* Sailor Moon */
+main ul:nth-of-type(2) li:nth-of-type(2) {
+  flex-grow: 2;
+  z-index: 1;
+  position: relative;
+}
+
+/* Sailor Moon bigger than the rest */
+main ul:nth-of-type(2) li:nth-of-type(2),
+main ul:nth-of-type(2) li:nth-of-type(2) button, 
+main ul:nth-of-type(2) li:nth-of-type(2) img {
+  max-height: 50vh;
+  max-width: 50vw;
+}
+
+/* Removes scaling effect from Sailor Moon when active */
+main ul:nth-of-type(2) li:nth-of-type(2) button img:active {
+  transform: none;
+}
+
+/* Animation that plays when transforming */
+.usagiTransform {
+  animation: transform 2s ease-in;
+}
+
+
+
+/**********/
+/* FOOTER */
+/**********/
+footer {
+  background-color: var(--footer-color);
+  width: 100vw;
+  text-align: center;
+  padding: 1em 0em;
+  font-family: var(--normal-font);
+  height: auto;
+}
+
+
+
+/*************/
+/* DARK MODE */
+/*************/
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: hsl(228, 32%, 32%);
+    --secondary-color: hsl(227, 100%, 88%);
+    --tertiary-color: hsl(228, 40%, 18%);
+    --footer-color: hsl(228, 40%, 18%);
+    --button-shadow: hsla(229, 30%, 14%, 0.4);
+  }
+}
+
+
+
+/**************/
+/* ANIMATIONS */
+/**************/
+@keyframes transform {
+  0% {
+    transform: rotateY(0deg);
+  }
+
+  20% {
+    transform: rotateY(270deg);
+  }
+
+  40% {
+    transform: rotateY(360deg);
+  }
+
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
+
+
+/******************/
+/* REDUCED MOTION */
+/******************/
+@media (prefers-reduced-motion) {
+  button img {
+    transition: 0.5s;
+  }
+  
+  /* All buttons glow on hover */
+  button img:hover {
+    transition: 0.5s;
+  }
+
+  @keyframes transform {
+    0% {
+      transform: rotateY(0);
+      animation-timing-function: ease-out;
+  }
+
+  50% {
+    transform: rotateY(90deg);
+    animation-timing-function: ease-in;
+}
+
+  100% {
+      transform: rotateY(0deg);
+      animation-timing-function: ease-in;
+  }
+  }
+
+.usagiTransform {
+  animation: transform 3s ease-in;
+}
+}
