@@ -60,7 +60,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;
   width: 100vw;
   background-image: url(../images/texture.png);
   background-position: top right;
@@ -157,7 +157,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1em 1em 0 1em;
+  padding: 0em 1em 0 1em;
   width: 100vw;
 }
 
@@ -174,8 +174,9 @@ header section button:nth-of-type(1) img {
 }
 
 /* Music note location */
-header button:nth-of-type(1) {
-  margin-left: auto;
+header > button {
+  margin: 0em 1em 0 auto;
+  transform: translateY(2em);
 }
 
 /* Music note size */
@@ -218,7 +219,7 @@ main ul {
   text-align: center;
   justify-content: space-between;
   align-items: center;
-  gap: 8em;
+  gap: 8vh;
   min-height: 100%;
   flex-grow: 1;
 }
@@ -331,9 +332,10 @@ footer {
   background-color: var(--footer-color);
   width: 100vw;
   text-align: center;
-  padding: 1em 0em;
+  padding: 2.6vh 0em;
   font-family: var(--normal-font);
   height: auto;
+  margin-top: auto;
 }
 
 
